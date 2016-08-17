@@ -1,5 +1,7 @@
 package com.bwf.framwork.http;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.bwf.framwork.base.BaseBean;
@@ -33,13 +35,14 @@ public abstract class HttpCallBack<T extends BaseBean> extends StringCallback {
 
         if (StringUtils.isNotEmpty(response)){
 
-
             try{
 
                 BaseBean baseBean = JSON.parseObject(response, BaseBean.class);
 
                 if ("10000".equals(baseBean.code)){
-                    onSuccess(JSON.parseObject(response,tClass));
+//                    Log.e("tag",baseBean.toString());
+                    Log.e("tag",response+"");
+                    onSuccess(JSON.parseObject(baseBean.result,tClass));
                 }else {
                     onFail(baseBean.msg);
                 }

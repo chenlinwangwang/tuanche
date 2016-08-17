@@ -17,7 +17,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //百度定位
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
 }
+
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -29,4 +38,7 @@ dependencies {
 
     //okhttp
     compile 'com.zhy:okhttputils:2.6.2'
+
+
+    compile 'com.google.code.gson:gson:2.2.4'
 }

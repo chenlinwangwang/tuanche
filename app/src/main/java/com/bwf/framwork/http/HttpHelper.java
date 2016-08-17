@@ -19,6 +19,25 @@ public class HttpHelper {
                 .build()
                 .execute(callBack);
     }
+    //获取城市列表
+    public static void getSelsctCityDetail(String url,HttpCallBack callBack){
+        OkHttpUtils
+                .get()
+                .url(url)
+                .addParams("pageSize", "4")
+                .build()
+                .execute(callBack);
+    }
+    //获取当前城市
+    public static void getNowCity(String url,String longitude,String latitude,HttpCallBack callBack){
+        OkHttpUtils
+                .get()
+                .url(url)
+                .addParams("longitude", longitude)
+                .addParams("latitude", latitude)
+                .build()
+                .execute(callBack);
+    }
 
 
 }

@@ -10,9 +10,19 @@
     tools:context="com.bwf.tuanche.MainActivity">
 
 
-    <ListView
-        android:id="@+id/lv_test"
+    <TextView
+        android:id="@+id/tv_main_test"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:textSize="25sp"/>
+
+
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="SelectCity"/>
 
 </RelativeLayout>
