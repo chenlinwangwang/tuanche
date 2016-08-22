@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.bwf.framwork.base.BaseBean;
 import com.bwf.framwork.utils.StringUtils;
+import com.bwf.framwork.utils.ToastUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.ParameterizedType;
@@ -33,17 +34,17 @@ public abstract class HttpCallBack<T extends BaseBean> extends StringCallback {
 
         if (StringUtils.isNotEmpty(response)){
 
-
             try{
 
                 BaseBean baseBean = JSON.parseObject(response, BaseBean.class);
-
+//                ToastUtil.showToastLong(response);
                 if ("10000".equals(baseBean.code)){
-                    onSuccess(JSON.parseObject(response,tClass));
+                    onSuccess(JSON.parseObject(baseBean.result,tClass));
                 }else {
                     onFail(baseBean.msg);
                 }
             }catch (JSONException e){
+                e.printStackTrace();
                 onFail("解析异常");
             }
 

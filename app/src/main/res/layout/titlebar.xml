@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="成都"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/icon_top_add_arrow"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dp"
+            android:src="@mipmap/icon_top_add_arrow" />
+
+        <EditText
+            android:id="@+id/et_research"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/magnifying_glass"
+            android:hint="请输入品牌、车型"
+            android:focusable="false"
+            android:inputType="none" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/icon_top_icon_saomiao" />
+    </LinearLayout>
+</LinearLayout>
