@@ -42,7 +42,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:textColor="@android:color/holo_red_light"
-                android:text=""
+                android:text="定位中..."
                 android:textSize="20sp" />
 
             <TextView
@@ -65,7 +65,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text=""
+                    android:text="重庆"
                     android:textSize="20sp" />
 
                 <View
@@ -80,7 +80,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text=""
+                    android:text="西安"
                     android:textSize="20sp" />
 
                 <View
@@ -95,7 +95,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text=""
+                    android:text="昆明"
                     android:textSize="20sp" />
 
                 <View
@@ -110,7 +110,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text=""
+                    android:text="银川"
                     android:textSize="20sp" />
             </LinearLayout>
 

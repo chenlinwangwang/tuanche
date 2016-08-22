@@ -10,15 +10,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 public class HttpHelper {
 
 
-    public static void getDetail(String url,String pageNo,String pageSize,HttpCallBack callBack){
-        OkHttpUtils
-                .post()
-                .url(url)
-                .addParams("pageNo", pageNo)
-                .addParams("pageSize", pageSize)
-                .build()
-                .execute(callBack);
-    }
+
     //获取城市列表
     public static void getSelsctCityDetail(String url,HttpCallBack callBack){
         OkHttpUtils
@@ -35,6 +27,14 @@ public class HttpHelper {
                 .url(url)
                 .addParams("longitude", longitude)
                 .addParams("latitude", latitude)
+                .build()
+                .execute(callBack);
+    }
+    //获取最新版本
+    public static void getNewVersion(String url,HttpCallBack callBack){
+        OkHttpUtils
+                .get()
+                .url(url)
                 .build()
                 .execute(callBack);
     }

@@ -60,7 +60,7 @@ public class SelectCityActivity extends BaseActivity implements BaiDuLocationLis
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         //实现监听接口
         mLocationClient.registerLocationListener( baiDuLocationListener );    //注册监听函数
-        //参数百度定位的参数
+        //设置百度定位的参数
         initLocation();
         //开启定位（获取当前位置的参数（只需经纬度））
         mLocationClient.start();
@@ -100,7 +100,7 @@ public class SelectCityActivity extends BaseActivity implements BaiDuLocationLis
     public void initData() {
 
 
-        //请求数据
+        //请求城市数据
         HttpHelper.getSelsctCityDetail(UrlUtils.Getcitys, new HttpCallBack<CityResultBean>() {
             @Override
             public void onSuccess(CityResultBean result) {
@@ -117,7 +117,7 @@ public class SelectCityActivity extends BaseActivity implements BaiDuLocationLis
                     String nex = nextpy.substring(0,1);
                     if (!fir.equals(nex)){
                         fir = nex;
-                        //加载所有城市
+                        //加载同一类的城市
                         addAllCity(fir);
                     }
                 }
@@ -147,6 +147,9 @@ public class SelectCityActivity extends BaseActivity implements BaiDuLocationLis
                 String LocalCityName = String.format("当前城市-%s",result.name);
                 select_city_title.setText(LocalCityName);
                 tv_NowCity.setText(result.name);
+                //定死几个周边城市
+
+
             }
 
             @Override

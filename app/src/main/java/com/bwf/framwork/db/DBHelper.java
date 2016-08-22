@@ -23,7 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return dbHelper;
     }
 
-    private DBHelper(Context context) {
+    private DBHelper(Context context) {//创建数据库
         super(context, Constants.DB_NAME, null, Constants.DB_VERSION);
     }
 
@@ -38,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
             for (int i = 0; i < Constants.TABLES.length; i++) {
                 Class<BaseModel> baseModelClass = (Class<BaseModel>) Class.forName(Constants.TABLES[i]);//根据类名反射拿到Class
                 BaseModel baseModel = baseModelClass.newInstance();//根据Class拿到对象
-                db.execSQL(baseModel.getCreateTableSql());
+                db.execSQL(baseModel.getCreateTableSql());//创建表
 
             }
         } catch (Exception e) {
