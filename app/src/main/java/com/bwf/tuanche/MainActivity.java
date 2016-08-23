@@ -2,13 +2,16 @@ package com.bwf.tuanche;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.bwf.framwork.base.ReccleViewAdapter;
 import com.bwf.framwork.bean.UserBean;
 import com.bwf.framwork.http.HttpCallBack;
 import com.bwf.framwork.http.HttpHelper;
+import com.bwf.framwork.utils.IntentUtils;
+import com.bwf.tuanche.details.DetailsActivity;
+import com.bwf.tuanche.details.HJiaDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,20 @@ public class MainActivity extends AppCompatActivity {
         lv_test.setAdapter(adapter);
 
         test();
+        findViewById(R.id.btn_caiDetail).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentUtils.openActivity(MainActivity.this, DetailsActivity.class);
+            }
+        });
+        findViewById(R.id.btn_hjia).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("cityId","156");
+                IntentUtils.openActivity(MainActivity.this, HJiaDetailActivity.class,bundle);
+            }
+        });
     }
 
     public void test(){

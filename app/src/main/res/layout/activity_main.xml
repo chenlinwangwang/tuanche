@@ -14,5 +14,22 @@
         android:id="@+id/lv_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <Button
+        android:id="@+id/btn_caiDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="汽车详情页"/>
+    <Button
+        android:id="@+id/btn_hjia"
+        android:layout_below="@id/btn_caiDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="婚姻座驾"/>
+    <Button
+        android:id="@+id/btn_HY"
+        android:layout_below="@id/btn_hjia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HY"/>
 
 </RelativeLayout>
