@@ -99,6 +99,6 @@ public class ScanRecordActivity extends BaseActivity {
 
     public void insertdata(){
         //同时插入多条数据
-        busInfoModel.insertmore();
+//        busInfoModel.insertmore();
     }
 }

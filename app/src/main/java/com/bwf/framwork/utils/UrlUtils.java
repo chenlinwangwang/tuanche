@@ -12,6 +12,11 @@ public class UrlUtils {
     public static final String VersionUpadteServlet = BASE_URL+"bwf_TuanChe_VersionUpadteServlet";//获取更新数据
 
 
+    public static final String BUY_CAR = BASE_URL+"bwf_TuanChe_HomeServlet";
+    public static final String HOT_BRAND = BASE_URL+"bwf_TuanChe_TopBrand";
+    public static final String HOT_TYPE = BASE_URL+"bwf_TuanChe_Hotstyle";
+    public static final String BANNER = BASE_URL+"bwf_TuanChe_BannerServlet";
+
 
 
 }

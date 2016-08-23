@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.bwf.tuanche.home_page.fragment.Fragment_4">
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recycleView_fragment_4"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/simple_black" />
+</LinearLayout>

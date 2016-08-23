@@ -92,7 +92,7 @@ public class UpdatePopupWindow extends PopupWindow implements View.OnClickListen
      * 请求更新数据
      */
     public void getUpdateDate(){
-        HttpHelper.getNewVersion(UrlUtils.VersionUpadteServlet, new HttpCallBack<UpdateResult>() {
+        HttpHelper.getNewVersion(UrlUtils.VersionUpadteServlet, new com.bwf.framwork.db.HttpCallBack<UpdateResult>() {
             @Override
             public void onSuccess(UpdateResult result) {
 //                Log.e("UpdateResult","UpdateResult " +result.toString());

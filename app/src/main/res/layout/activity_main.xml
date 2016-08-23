@@ -1,52 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main_layout"
-    tools:context="com.bwf.tuanche.MainActivity">
-
-
-
-
-    <TextView
-        android:id="@+id/tv_main_test"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:textSize="25sp"/>
-
-
-    <Button
-        android:id="@+id/btn_test"
+    >
+    <LinearLayout
+        android:id="@+id/ll_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="SelectCity"/>
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_pop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_test"
-        android:text="pop"/>
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_pop"
-        android:text="login"/>
-    <Button
-        android:id="@+id/btn_webview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_login"
-        android:text="VWEView"/>
-    <Button
-        android:id="@+id/btn_test_scint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/btn_webview"
-        android:text="ScanRecord"/>
+        <com.bwf.tuanche.home_page.View.TitleBar
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/SwipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title">
+
+            <ScrollView
+                android:id="@+id/scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <fragment
+                        android:id="@+id/fragment_1_banner"
+                        android:name="com.bwf.tuanche.home_page.fragment.Fragment_1_Banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <fragment
+                        android:id="@+id/fragment_1"
+                        android:name="com.bwf.tuanche.home_page.fragment.Fragment_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <fragment
+                        android:id="@+id/fragment_2"
+                        android:name="com.bwf.tuanche.home_page.fragment.Fragment_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <fragment
+                        android:id="@+id/fragment_4"
+                        android:name="com.bwf.tuanche.home_page.fragment.Fragment_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <fragment
+                        android:id="@+id/fragment_5"
+                        android:name="com.bwf.tuanche.home_page.fragment.Fragment_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <fragment
+                        android:id="@+id/fragment_3"
+                        android:name="com.bwf.tuanche.home_page.fragment.Fragment_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                    </fragment>
+                </LinearLayout>
+            </ScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+    <com.bwf.tuanche.home_page.View.BottomView
+        android:id="@+id/bottomview_main"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

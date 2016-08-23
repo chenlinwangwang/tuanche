@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="7dp"
     tools:context="com.bwf.tuanche.Login.LoginActivity">
 
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="60dp"
+        android:padding="7dp">
 
         <ImageView
             android:id="@+id/img_login_back"
@@ -55,7 +55,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="7dp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -111,7 +112,8 @@
             android:id="@+id/r1_content2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="7dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -148,6 +150,12 @@
         android:background="@drawable/yzm_login"
         android:layout_below="@id/r1_content1"
         android:layout_marginTop="5dp"
+        android:layout_margin="7dp"
         android:text="验证登录" />
+    <com.bwf.tuanche.home_page.View.BottomView
+        android:id="@+id/Login_bottview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

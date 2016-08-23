@@ -38,7 +38,7 @@ public abstract class HttpCallBack<T extends BaseBean> extends StringCallback {
             try{
 
                 BaseBean baseBean = JSON.parseObject(response, BaseBean.class);
-
+//                ToastUtil.showToastLong(response);
                 if ("10000".equals(baseBean.code)){
 //                    Log.e("tag",baseBean.toString());
                     Log.e("tag",response+"");
@@ -47,6 +47,7 @@ public abstract class HttpCallBack<T extends BaseBean> extends StringCallback {
                     onFail(baseBean.msg);
                 }
             }catch (JSONException e){
+                e.printStackTrace();
                 onFail("解析异常");
             }
 

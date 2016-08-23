@@ -41,7 +41,7 @@ public class DrawableUtils {
      * 设置drawableTop图片
      */
     public static <T extends TextView> void drawableTop(Context context, T myTextview, int res) {
-        if (context == null || myTextview == null)
+           if (context == null || myTextview == null)
             return;
         Drawable drawable = ContextCompat.getDrawable(context, res);
         /// 这一步必须要做,否则不会显示.
