@@ -69,9 +69,8 @@ public class UpdatePopupWindow extends PopupWindow implements View.OnClickListen
     }
 
     //pop显示位置
-    @Override
-    public void showAtLocation(View parent, int gravity, int x, int y) {
-        super.showAtLocation(parent, gravity, x, y);
+    public void setShowAtLocation(View parent, int gravity, int x, int y) {
+        this.showAtLocation(parent, gravity, x, y);
     }
 
     @Override

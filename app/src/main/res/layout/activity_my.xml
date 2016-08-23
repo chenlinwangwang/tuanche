@@ -63,6 +63,7 @@
                     android:text="团车券" />
 
                 <TextView
+                    android:id="@+id/tv_my_record"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="120dp"

@@ -8,10 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.bwf.framwork.base.BaseActivity;
-import com.bwf.framwork.http.HttpCallBack;
 import com.bwf.framwork.http.HttpHelper;
 import com.bwf.framwork.utils.IntentUtils;
 import com.bwf.framwork.utils.ListViewUtils;
@@ -19,7 +16,6 @@ import com.bwf.framwork.utils.StringUtils;
 import com.bwf.framwork.utils.UrlUtils;
 import com.bwf.tuanche.R;
 import com.bwf.tuanche.home_page.MainActivity;
-import com.bwf.tuanche.selectcity.baidumap.BaiDuLocationListener;
 import com.bwf.tuanche.selectcity.cityadapter.AllCityAdapter;
 import com.bwf.tuanche.selectcity.citylistresultbean.CityResultBean;
 import com.bwf.tuanche.selectcity.citylistresultbean.NowCityBean;

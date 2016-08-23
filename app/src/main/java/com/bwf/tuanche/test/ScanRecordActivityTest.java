@@ -2,22 +2,16 @@ package com.bwf.tuanche.test;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bwf.framwork.base.BaseActivity;
-import com.bwf.framwork.base.BaseModel;
 import com.bwf.framwork.bean.BusBean;
-import com.bwf.framwork.db.DBHelper;
 import com.bwf.framwork.db.model.BusInfoModel;
-import com.bwf.framwork.db.model.UserModel;
 import com.bwf.tuanche.R;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class ScanRecordActivity extends BaseActivity {
+public class ScanRecordActivityTest extends BaseActivity {
 
     private TextView scan1,scan2,scan3,scan4,tv_scn;
     private Button btn_scce;
@@ -27,7 +21,7 @@ public class ScanRecordActivity extends BaseActivity {
 
     @Override
     public int getContentViewId() {
-        return R.layout.activity_scan_record;
+        return R.layout.activity_scan_record2;
     }
 
     @Override

@@ -6,8 +6,10 @@ import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -37,6 +39,7 @@ import com.bwf.tuanche.home_page.fragment.Fragment_5;
 import com.bwf.tuanche.selectcity.SelectCityActivity;
 import com.bwf.tuanche.selectcity.baidumap.BaiDuLocationListener;
 import com.bwf.tuanche.selectcity.citylistresultbean.NowCityBean;
+import com.bwf.tuanche.update.UpdatePopupWindow;
 
 import java.util.List;
 
@@ -53,6 +56,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     private BottomView bottomView;
     private RelativeLayout relativeLayout;
     private TextView select_city_chick,tv_order;
+    private View main_view;
     //百度定位
     private LocationClient mLocationClient;
     //百度定位返回参数类
@@ -70,14 +74,17 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     public void beforeInitView() {
         String nowcityId = getIntent().getStringExtra("cityid");
         String nowcityname = getIntent().getStringExtra("cityname");
-        Log.e("taa",nowcityId + nowcityname+"+++++++++++++++");
+//        Log.e("taa",nowcityId + nowcityname+"+++++++++++++++");
         if (nowcityId != null && nowcityname != null){
             cityId = nowcityId;
             cityName = nowcityname;
 
         }
-
+        handler.sendEmptyMessageDelayed(2,1000);
     }
+
+
+
 
     /**
      * 初始化百度定位参数
@@ -102,7 +109,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @Override
     public void initView() {
-
+        main_view = findViewByIdNoCast(R.id.main_view);
         select_city_chick = findViewByIdNoCast(R.id.select_city_chick);
         tv_order = findViewByIdNoCast(R.id.tv_order);
         setOnClick(select_city_chick,tv_order);
@@ -141,6 +148,8 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         getDataType();
         getData();
         getBannerData();
+
+
     }
 
     public void baiDuLocation(){
@@ -239,6 +248,10 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 bundle.putString("nowcity",nowcoty);
                 IntentUtils.openActivity(this, SelectCityActivity.class,bundle);
             break;
+            case R.id.tv_order://
+                UpdatePopupWindow update = new UpdatePopupWindow(this);
+                update.setShowAtLocation(main_view, Gravity.CENTER,0,0);
+            break;
 
         }
 
@@ -246,23 +259,17 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        ToastUtil.showToast("更新数据");
-        new Thread(new Runnable() {
+
+        refreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshLayout.setVisibility(View.INVISIBLE);//
-                    }
-                });
+                refreshLayout.setRefreshing(false);
             }
-        });
+        },1000);
+        getBuyCar();
+        getDataType();
+        getData();
+        getBannerData();
     }
 
     private static final int TIMES = 2000;
@@ -289,6 +296,11 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         switch (message.what) {
             case 1:
                 isBack = true;
+                break;
+            case 2:
+                //更新
+                UpdatePopupWindow update = new UpdatePopupWindow(this);
+                update.setShowAtLocation(main_view, Gravity.CENTER,0,0);
                 break;
         }
         return false;
@@ -329,6 +341,12 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 }
