@@ -111,6 +111,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN://按下事件
                 startY = (int) ev.getY();
+                tv_loading.setText("松开刷新数据");
                 break;
             case MotionEvent.ACTION_MOVE://滑动事件
                 endY = (int) ev.getY();
@@ -119,6 +120,9 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                     setSelection(0);
                     headerView.setPadding(0, -headerViewHeight + moveY, 0, 0);
                     if (moveY > headerViewHeight)
+                        handler.removeMessages(1);
+                        handler.removeMessages(2);
+                        handler.removeMessages(3);
                         tv_loading.setText("松开刷新数据");
                 }
                 break;

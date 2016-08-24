@@ -11,10 +11,12 @@ import com.bwf.framwork.bean.CommentList;
 import com.bwf.framwork.http.HttpCallBack;
 import com.bwf.framwork.http.HttpHelper;
 import com.bwf.framwork.utils.IntentUtils;
+import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.framwork.utils.UrlUtils;
 import com.bwf.tuanche.R;
 import com.bwf.tuanche.details.adapter.AllCommentAdapter;
 import com.bwf.tuanche.details.adapter.RefreshListView;
+import com.bwf.tuanche.home_page.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,7 @@ public class AllCommentActivity extends BaseActivity {
 
     @Override
     public void beforeInitView() {
+        showPogressbar();
         cityId = getIntent().getStringExtra("cityId");
         brandId = getIntent().getStringExtra("brandId");
         //count=10&offset=1&cityId=156&brandId=31
@@ -83,6 +86,7 @@ public class AllCommentActivity extends BaseActivity {
                 new HttpCallBack<AllCommentBean>() {
                     @Override
                     public void onSuccess(AllCommentBean result) {
+                        dissmissProgressbar();
                         addMore.setOnComplete();//加载完成动画消失
                         if (result != null) {
                             setAllCommentText(result);//设置文字内容
@@ -94,6 +98,7 @@ public class AllCommentActivity extends BaseActivity {
 
                     @Override
                     public void onFail(String errMsg) {
+                        dissmissProgressbar();
                         addMore.setOnComplete();
                     }
                 }
@@ -112,7 +117,7 @@ public class AllCommentActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_title_back:
-                IntentUtils.openActivity(this, DetailsActivity.class);
+                IntentUtils.openActivity(this, MainActivity.class);
                 break;
         }
     }

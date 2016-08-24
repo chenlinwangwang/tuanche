@@ -12,6 +12,7 @@ import com.bwf.framwork.http.HttpCallBack;
 import com.bwf.framwork.http.HttpHelper;
 import com.bwf.framwork.image.ImageLoader;
 import com.bwf.framwork.utils.IntentUtils;
+import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.framwork.utils.UrlUtils;
 import com.bwf.tuanche.MyApplication;
 import com.bwf.tuanche.R;
@@ -40,6 +41,7 @@ public class HJiaDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        showPogressbar();
         tv_hj_back = findViewByIdNoCast(R.id.tv_hj_back);
         tv_hj_share = findViewByIdNoCast(R.id.tv_hj_share);
         tv_hj_brand = findViewByIdNoCast(R.id.tv_hj_brand);
@@ -54,29 +56,33 @@ public class HJiaDetailActivity extends BaseActivity {
         HttpHelper.getHJiaData(UrlUtils.CAR_BUY_HJia, new HttpCallBack<HJiaBean>() {
             @Override
             public void onSuccess(final HJiaBean result) {
-                tv_hj_brand.setText(result.adpTitle);
-                ImageLoader.getInstance().disPlayImage(sdv_hjia, result.adpLogo);
-                hJiaReccleViewAdapter = new HJiaReccleViewAdapter(MyApplication.getAppContext());
-                hJiaReccleViewAdapter.setCarstyleList(result);
-                hJiaReccleViewAdapter.setMyHJCallBack(new HJiaReccleViewAdapter.MyHJCallBack() {
-                    @Override
-                    public void OnClick(int position) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("styleId", result.carstyleList.get(position).brandId);
-                        bundle.putString("cityId", cityId);
-                        bundle.putString("brandId", result.carstyleList.get(position).brandId);
-                        IntentUtils.openActivity(HJiaDetailActivity.this, DetailsActivity.class, bundle);
-                    }
-                });
-                LinearLayoutManager manager = new LinearLayoutManager(MyApplication.getAppContext());
-                rv_hjia.setLayoutManager(manager);
-                rv_hjia.setAdapter(hJiaReccleViewAdapter);
-                rv_hjia.addItemDecoration(itemDecoration);
+                dissmissProgressbar();
+                if (result != null){
+                    tv_hj_brand.setText(result.adpTitle);
+                    ImageLoader.getInstance().disPlayImage(sdv_hjia, result.adpLogo);
+                    hJiaReccleViewAdapter = new HJiaReccleViewAdapter(MyApplication.getAppContext());
+                    hJiaReccleViewAdapter.setCarstyleList(result);
+                    hJiaReccleViewAdapter.setMyHJCallBack(new HJiaReccleViewAdapter.MyHJCallBack() {
+                        @Override
+                        public void OnClick(int position) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("styleId", result.carstyleList.get(position).brandId);
+                            bundle.putString("cityId", cityId);
+                            bundle.putString("brandId", result.carstyleList.get(position).brandId);
+                            IntentUtils.openActivity(HJiaDetailActivity.this, DetailsActivity.class, bundle);
+                        }
+                    });
+                    LinearLayoutManager manager = new LinearLayoutManager(MyApplication.getAppContext());
+                    rv_hjia.setLayoutManager(manager);
+                    rv_hjia.setAdapter(hJiaReccleViewAdapter);
+                    rv_hjia.addItemDecoration(itemDecoration);
+                }
             }
 
             @Override
             public void onFail(String errMsg) {
-
+                dissmissProgressbar();
+                ToastUtil.showToast("数据加载失败");
             }
         });
     }

@@ -1,33 +1,20 @@
 package com.bwf.tuanche.details;
 
-import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-
-import com.alibaba.fastjson.JSON;
 import com.bwf.framwork.base.BaseActivity;
 import com.bwf.framwork.bean.CarDetailBean;
-import com.bwf.framwork.bean.TcbzDesc;
 import com.bwf.framwork.http.HttpCallBack;
 import com.bwf.framwork.http.HttpHelper;
 import com.bwf.framwork.utils.IntentUtils;
 import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.framwork.utils.UrlUtils;
-//import com.bwf.tuanche.MainActivity;
 import com.bwf.tuanche.MyApplication;
 import com.bwf.tuanche.R;
 import com.bwf.tuanche.details.fragment.CarDetailFragment1;
 import com.bwf.tuanche.details.fragment.CarDetailFragment2;
 import com.bwf.tuanche.home_page.MainActivity;
-
-import java.util.List;
 
 /**
  * 详情页
@@ -38,8 +25,6 @@ public class DetailsActivity extends BaseActivity {
     private TextView tv_back, tv_brand, tv_city, tv_share;
     private CarDetailFragment1 carDetailFragment1;
     private CarDetailFragment2 carDetailFragment2;
-    private PopupWindow myPopupWindow;
-    private LinearLayout ll_layout;
 
     @Override
     public int getContentViewId() {
@@ -48,6 +33,7 @@ public class DetailsActivity extends BaseActivity {
 
     @Override
     public void beforeInitView() {
+        showPogressbar();
         cityId = MyApplication.getCityId();
         styleId = getIntent().getStringExtra("styleId");
         brandId = getIntent().getStringExtra("brandId");
@@ -63,7 +49,6 @@ public class DetailsActivity extends BaseActivity {
         tv_city = findViewByIdNoCast(R.id.tv_city);
         tv_share = findViewByIdNoCast(R.id.tv_share);
         tv_brand = findViewByIdNoCast(R.id.tv_brand);
-        ll_layout = findViewByIdNoCast(R.id.ll_layout);
         dismissSoftKeyboard(this);
         setOnClick(tv_back, tv_city, tv_share);
         carDetailFragment1 = (CarDetailFragment1) getSupportFragmentManager().findFragmentById(R.id.detail_fragment1);
@@ -72,16 +57,24 @@ public class DetailsActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        if (cityId != null && !cityId.isEmpty() && styleId != null && !styleId.isEmpty() && brandId != null && !brandId.isEmpty())
-            formCarbrandId();
-        else if (cityId != null && !cityId.isEmpty() && firmbrandId != null && !firmbrandId.isEmpty())
-            formCarfirmbrandId();
+        if (cityId != null && !cityId.isEmpty()) {
+            if (styleId != null && !styleId.isEmpty() && brandId != null && !brandId.isEmpty()) {
+                formCarbrandId();
+            } else if (firmbrandId != null && !firmbrandId.isEmpty()) {
+                formCarfirmbrandId();
+            } else if ((styleId == null && brandId == null) || firmbrandId == null) {
+                dissmissProgressbar();
+                IntentUtils.openActivity(this, MainActivity.class);
+                ToastUtil.showToast("参数异常，数据加载失败");
+            }
+        }
     }
 
     public void formCarbrandId() {
         HttpHelper.getCarDetail(UrlUtils.CAR_BUY_DETAIL, styleId, cityId, brandId, new HttpCallBack<CarDetailBean>() {
             @Override
             public void onSuccess(CarDetailBean result) {
+                dissmissProgressbar();
                 Log.e("TAG", "onSuccess: " + result);
                 if (result != null) {
                     tv_brand.setText(result.brandName);
@@ -93,6 +86,8 @@ public class DetailsActivity extends BaseActivity {
 
             @Override
             public void onFail(String errMsg) {
+                dissmissProgressbar();
+                ToastUtil.showToast("数据加载失败");
                 Log.e("TAG", "errMsg: " + errMsg);
             }
         });
@@ -102,6 +97,7 @@ public class DetailsActivity extends BaseActivity {
         HttpHelper.getHotCarDetail(UrlUtils.CAR_BUY_DETAIL, cityId, firmbrandId, new HttpCallBack<CarDetailBean>() {
             @Override
             public void onSuccess(CarDetailBean result) {
+                dissmissProgressbar();
                 Log.e("TAG", "onSuccess: " + result);
                 if (result != null) {
                     tv_brand.setText(result.brandName);
@@ -113,6 +109,8 @@ public class DetailsActivity extends BaseActivity {
 
             @Override
             public void onFail(String errMsg) {
+                dissmissProgressbar();
+                ToastUtil.showToast("数据加载失败");
                 Log.e("TAG", "errMsg: " + errMsg);
             }
         });
