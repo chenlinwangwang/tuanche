@@ -31,6 +31,12 @@ public abstract class BaseModel implements BaseColumns {
         return getCreateTable(getTableName(), getParamsMap());
     }
 
+    /**
+     * 创建表的SQL语句
+     * @param tableName
+     * @param map
+     * @return
+     */
     public String getCreateTable(String tableName, Map<String, String> map) {
 
         StringBuilder stringBuilder = new StringBuilder();

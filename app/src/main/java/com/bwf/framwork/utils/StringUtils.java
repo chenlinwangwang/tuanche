@@ -217,4 +217,16 @@ public class StringUtils {
         return dateString;
     }
 
+    /**
+     * String字符串小写转大写
+     */
+    public static String lowerToUper(String lower){
+        return lower.toUpperCase();
+    }
+    /**
+     * String字符串大写转小写
+     */
+    public static String uperToLower(String lower){
+        return lower.toLowerCase();
+    }
 }

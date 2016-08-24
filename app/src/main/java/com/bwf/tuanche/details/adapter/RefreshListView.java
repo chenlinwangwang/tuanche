@@ -26,7 +26,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
     private ImageView img_header;
     private int headerViewHeight;
     private Handler handler;
-    private AnimationDrawable animation;
+    private AnimationDrawable headerAnimation;
 
     public RefreshListView(Context context) {
         this(context, null);
@@ -48,7 +48,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
         addHeaderView(headerView);
         tv_loading = (TextView) headerView.findViewById(R.id.tv_loading);
         img_header = (ImageView) headerView.findViewById(R.id.img_header);
-        animation = (AnimationDrawable) img_header.getDrawable();
+        headerAnimation = (AnimationDrawable) img_header.getDrawable();
 
         //计算高度
         measureView(headerView);
@@ -127,7 +127,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
                     onLoadMoreListener.onRefresh();
                     headerView.setPadding(0, 0, 0, 0);
                     handler.sendEmptyMessage(1);
-                    animation.start();
+                    headerAnimation.start();
                 }
                 break;
         }

@@ -1,15 +1,27 @@
 package com.bwf.framwork.http;
 
+//<<<<<<< HEAD
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.bwf.framwork.base.BaseBean;
+//=======
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
+import com.bwf.framwork.base.BaseBean;
+import com.bwf.framwork.utils.StringUtils;
+import com.bwf.framwork.utils.ToastUtil;
+//>>>>>>> ccf2ba2db449a64a64016fb74c5fad692d968087
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+//<<<<<<< HEAD
+//=======
+//
+//>>>>>>> ccf2ba2db449a64a64016fb74c5fad692d968087
 import okhttp3.Call;
 
 /**
@@ -35,7 +47,7 @@ public abstract class HttpArrayCallBack<T> extends StringCallback {
 
         if (!TextUtils.isEmpty(response)) {
 
-            Log.e("tag","服务器返回结果: " + response);
+            Log.e("tag", "服务器返回结果: " + response);
 
             try {
 
@@ -52,13 +64,34 @@ public abstract class HttpArrayCallBack<T> extends StringCallback {
                     onFail(baseBean.msg);
                 }
             } catch (JSONException e) {
-                onFail("解析异常");
-            }
+//=======
+                if (StringUtils.isNotEmpty(response)) {
 
 
-        } else
+                    try {
+
+                        BaseBean baseBean = JSON.parseObject(response, BaseBean.class);
+//                ToastUtil.showToastLong(response);
+                        if ("10000".equals(baseBean.code)) {
+                            onSuccess(JSON.parseArray(baseBean.result, tClass));
+                        } else {
+                            onFail(baseBean.msg);
+                        }
+                    } catch (JSONException j) {
+                        j.printStackTrace();
+//>>>>>>> ccf2ba2db449a64a64016fb74c5fad692d968087
+                        onFail("解析异常");
+                    }
+
+
+//<<<<<<< HEAD
+                } //else
+//=======
+
+            }}else
+//>>>>>>> ccf2ba2db449a64a64016fb74c5fad692d968087
             onFail("服务器返回内容为空");
-
+//        }
     }
 
     public abstract void onSuccess(List<T> result);

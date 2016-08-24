@@ -13,11 +13,11 @@ import com.bwf.framwork.http.HttpHelper;
 import com.bwf.framwork.image.ImageLoader;
 import com.bwf.framwork.utils.IntentUtils;
 import com.bwf.framwork.utils.UrlUtils;
-import com.bwf.tuanche.MainActivity;
 import com.bwf.tuanche.MyApplication;
 import com.bwf.tuanche.R;
 import com.bwf.tuanche.details.adapter.DividerItemDecoration;
 import com.bwf.tuanche.details.adapter.HJiaReccleViewAdapter;
+import com.bwf.tuanche.home_page.MainActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class HJiaDetailActivity extends BaseActivity {
@@ -35,7 +35,7 @@ public class HJiaDetailActivity extends BaseActivity {
 
     @Override
     public void beforeInitView() {
-        cityId =this.getIntent().getExtras().getString("cityId");
+        cityId = MyApplication.getCityId();
     }
 
     @Override

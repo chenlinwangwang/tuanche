@@ -5,6 +5,7 @@ import android.database.Cursor;
 
 import com.bwf.framwork.base.BaseModel;
 import com.bwf.framwork.bean.UserBean;
+import com.bwf.framwork.db.DBHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +38,6 @@ public class UserModel extends BaseModel {
         values.put("userid", userBean.userId);
         values.put("name", userBean.userName);
         insert(TABLE_NAME, values);
-
     }
 
     /**
@@ -50,7 +50,6 @@ public class UserModel extends BaseModel {
         UserBean userBean = new UserBean();
         String sql = "select * from userinfo where userid=" + id;
         Cursor cursor = select(sql);
-
         if (cursor != null) {
             if (cursor.moveToNext()) {//找到userid为123的数据了
                 userBean.userName = cursor.getString(cursor.getColumnIndex("name"));

@@ -1,7 +1,12 @@
 package com.bwf.framwork.http;
 
+//<<<<<<< HEAD
 import android.text.TextUtils;
 import android.util.Log;
+//=======
+import android.util.Log;
+
+//>>>>>>> ccf2ba2db449a64a64016fb74c5fad692d968087
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.bwf.framwork.base.BaseBean;
@@ -32,6 +37,7 @@ public abstract class HttpCallBack<T> extends StringCallback {
 
         if (!TextUtils.isEmpty(response)) {
 
+//<<<<<<< HEAD
             Log.e("tag","服务器返回结果: " + response);
 
             try {
@@ -49,9 +55,24 @@ public abstract class HttpCallBack<T> extends StringCallback {
                     onFail(baseBean.msg);
                 }
             } catch (JSONException e) {
+//=======
+            try{
+
+                BaseBean baseBean = JSON.parseObject(response, BaseBean.class);
+//                ToastUtil.showToastLong(response);
+                if ("10000".equals(baseBean.code)){
+//                    Log.e("tag",baseBean.toString());
+                    Log.e("tag",response+"");
+                    onSuccess(JSON.parseObject(baseBean.result,tClass));
+                }else {
+                    onFail(baseBean.msg);
+                }
+            }catch (JSONException j){
+                j.printStackTrace();
+//>>>>>>> ccf2ba2db449a64a64016fb74c5fad692d968087
                 onFail("解析异常");
             }
-        } else
+        } }else
             onFail("服务器返回内容为空");
 
     }

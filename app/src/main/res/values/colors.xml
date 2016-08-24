@@ -12,4 +12,18 @@
     <color name="withe">#ffffff</color>
     <color name="colorTextHuang">#FD9908</color>
     <color name="colorTextBlack">#000000</color>
+    <color name="gray">#eae8e8</color>
+    <color name="write">#FFFFFF</color>
+    <color name="bg_bantouming">#1F000000</color>
+    <color name="bg_Login_nor">#FFBEBE</color>
+    <color name="bg_Login_select">#FF3737</color>
+
+    <color name="white">#ffffff</color>
+    <color name="simple_black">#ACB0B5</color>
+    <color name="black">#000000</color>
+    <color name="title_color">#2c0043</color>
+    <color name="yellow">#FFCB29</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#098DE0</color>
+
 </resources>

@@ -3,5 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+<!--<<<<<<< HEAD-->
     <string name="title_activity_floating_btn">FloatingBtn</string>
+<!--=======-->
+<!--&gt;>>>>>> ccf2ba2db449a64a64016fb74c5fad692d968087-->
 </resources>

@@ -1,6 +1,8 @@
 package com.bwf.framwork.base;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +10,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 
 import com.bwf.framwork.tools.AppManager;
+import com.bwf.tuanche.R;
 
 /**
  * Created by Lizhangfeng on 2016/7/13 0013.
@@ -80,7 +84,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     }
 
 
-
     /**
      * 本段代码用来处理如果输入法还显示的话就消失掉输入键盘
      */
@@ -94,6 +97,24 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    private Dialog dialog;
+
+    public void showPogressbar() {
+        if (dialog == null)
+            dialog = new Dialog(this,R.style.AppTheme);
+        View view = View.inflate(this, R.layout.progress_bar, null);
+        dialog.setContentView(view);
+        ImageView img_loading = (ImageView) view.findViewById(R.id.img_loading);
+        AnimationDrawable animationDrawable = (AnimationDrawable) img_loading.getDrawable();
+        animationDrawable.start();
+        dialog.show();
+    }
+    public void dissmissProgressbar() {
+
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
     /**
      * 显示键盘
      *

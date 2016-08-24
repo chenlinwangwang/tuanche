@@ -25,9 +25,10 @@ import com.bwf.framwork.image.ImageLoader;
 import com.bwf.framwork.utils.DisplayUtil;
 import com.bwf.framwork.utils.IntentUtils;
 import com.bwf.framwork.utils.ToastUtil;
-import com.bwf.tuanche.MainActivity;
+import com.bwf.tuanche.MyApplication;
 import com.bwf.tuanche.R;
 import com.bwf.tuanche.details.adapter.PromiseReccleViewAdapter;
+import com.bwf.tuanche.home_page.MainActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -84,10 +85,10 @@ public class CarDetailFragment1 extends BaseFragment {
             tv_people.setText(carDetailBean.manNumDesc);
             tv_saving.setText(carDetailBean.saveUpMoney);
             tv_tuanTime.setText(carDetailBean.groupbuyDate + "(" + carDetailBean.groupbuyWeek + ")");
-            tv_tuanAddress.setText(carDetailBean.styleId + carDetailBean.regular4sShop);
+            tv_tuanAddress.setText(MyApplication.getCityId() + carDetailBean.regular4sShop);
             if (carDetailBean.styleId != null) {
                 et_carType.setVisibility(View.VISIBLE);
-                et_carType.setText(carDetailBean.styleId);
+                et_carType.setText(carDetailBean.styleName);
             }
             ImageLoader.getInstance().disPlayImage(sdv_carPhoto, carDetailBean.logo);
 
@@ -116,7 +117,7 @@ public class CarDetailFragment1 extends BaseFragment {
                 break;
             case R.id.et_carType:
                 Bundle bundle = new Bundle();
-                bundle.putString("cityId", "156");
+                bundle.putString("cityId", MyApplication.getCityId());
                 bundle.putString("brandId", carDetailBean.brandId);
                 bundle.putString("styleId", carDetailBean.styleId);
                 carListPopuWindow = new CarListPopuWindow(getContext(), bundle);
