@@ -4,10 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.bwf.tuanche.details.fragment.CarDetailFragment1">
-    <View
-        android:id="@+id/myview"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdv_carPhoto"

@@ -47,13 +47,13 @@ public class CarListPopuWindow extends PopupWindow {
         super(context);
         this.context = context;
         this.mBundle = mBundle;
-//        type = mBundle.getString("type");
-//        cityId = mBundle.getString("cityId");
-//        brandId = mBundle.getString("brandId");
-        type = "0";
-        cityId = "156";
-        brandId = "25";
+        type = mBundle.getString("type");
+        cityId = MyApplication.getCityId();
+        brandId = mBundle.getString("brandId");
+        styleId = mBundle.getString("styleId");
         init(this.context);
+        Log.e("TAG", "cityId: "+cityId+"  styleId: "+styleId+"  brandId: "+brandId+"  type: "+type);
+
     }
 
     public void init(final Context context) {
@@ -69,46 +69,49 @@ public class CarListPopuWindow extends PopupWindow {
         this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         tv_car_type = (TextView) view.findViewById(R.id.tv_car_type);
         rv_carlist = (RecyclerView) view.findViewById(R.id.rv_carlist);
-        rv_carlist.addItemDecoration(new DividerItemDecoration(context,LinearLayoutManager.VERTICAL));
+        rv_carlist.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
         getCarListData();
     }
 
     public void getCarListData() {
-        HttpHelper.getCarList(UrlUtils.CAR_BUY_LIST, type, cityId, brandId, new HttpArrayCallBack<CarBeanList>() {
-            @Override
-            public void onSuccess(List<CarBeanList> result) {
-                if (result != null) {
-                    for (int i = 0; i < result.size(); i++) {
-                        tv_car_type.setText(result.get(i).brandName);
-                        styleLists = result.get(i).styleList;
-                        Log.e("TAG", "styleList:---------------------------------------- " + styleLists.size());
-                        if (styleLists != null) {
-                            rv_carlist.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
-                            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, LinearLayoutManager.VERTICAL);
-                            rv_carlist.addItemDecoration(dividerItemDecoration);
-                            carListAdapter = new CarListAdapter(MyApplication.getAppContext(), styleLists, mBundle);
-                            carListAdapter.setMyCallBack(new CarListAdapter.MyCallBack() {
-                                @Override
-                                public void onClick(int position) {
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("styleId", mBundle.getString("styleId"));
-                                    bundle.putString("cityId", mBundle.getString("cityId"));
-                                    bundle.putString("brandId", styleLists.get(position).brandId);
-                                    IntentUtils.openActivity(context, DetailsActivity.class, bundle);
-                                }
-                            });
-                            rv_carlist.setAdapter(carListAdapter);
+        if (type != null && !type.isEmpty() && cityId != null && !cityId.isEmpty() && brandId != null && !brandId.isEmpty()) {
+            HttpHelper.getCarList(UrlUtils.CAR_BUY_LIST, type, cityId, brandId, new HttpArrayCallBack<CarBeanList>() {
+                @Override
+                public void onSuccess(List<CarBeanList> result) {
+                    if (result != null) {
+                        for (int i = 0; i < result.size(); i++) {
+                            Log.e("TAG", "result: " + result.get(i).toString() );
+                            tv_car_type.setText(result.get(i).brandName);
+                            styleLists = result.get(i).styleList;
+                            Log.e("TAG", "styleList:---------------------------------------- " + styleLists.size());
+                            if (styleLists != null) {
+                                rv_carlist.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
+                                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, LinearLayoutManager.VERTICAL);
+                                rv_carlist.addItemDecoration(dividerItemDecoration);
+                                carListAdapter = new CarListAdapter(MyApplication.getAppContext(), styleLists, mBundle);
+                                carListAdapter.setMyCallBack(new CarListAdapter.MyCallBack() {
+                                    @Override
+                                    public void onClick(int position) {
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("styleId", styleId);
+                                        bundle.putString("cityId", MyApplication.getCityId());
+                                        bundle.putString("brandId", styleLists.get(position).brandId);
+                                        IntentUtils.openActivity(context, DetailsActivity.class, bundle);
+                                    }
+                                });
+                                rv_carlist.setAdapter(carListAdapter);
+                            }
                         }
                     }
-
                 }
-            }
 
-            @Override
-            public void onFail(String errMsg) {
-                Log.e("TAG", "errMsg: " + errMsg);
-            }
-        });
+                @Override
+                public void onFail(String errMsg) {
+                    Log.e("TAG", "errMsg: " + errMsg);
+                }
+            });
+        } else
+            ToastUtil.showToast("参数异常，数据请求失败");
     }
 
 

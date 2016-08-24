@@ -32,6 +32,7 @@ import com.bwf.tuanche.home_page.MainActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
+import java.util.Map;
 
 public class CarDetailFragment1 extends BaseFragment {
     private TextView tv_people, tv_saving, tv_tuanTime, tv_tuanAddress,et_carType;
@@ -44,13 +45,15 @@ public class CarDetailFragment1 extends BaseFragment {
     private PromiseReccleViewAdapter adapter;
     private Bundle mBundle;
     private PopupWindow popupWindow;
-    private CarListPopuWindow carListPopuWindow;
-    private View myview;
-
+    private MyCallBack myCallBack;
 
     public void setCarDetailBean(CarDetailBean carDetailBean) {
         this.carDetailBean = carDetailBean;
         initData();
+    }
+
+    public void setMyCallBack(MyCallBack myCallBack) {
+        this.myCallBack = myCallBack;
     }
 
     @Override
@@ -74,7 +77,6 @@ public class CarDetailFragment1 extends BaseFragment {
         btn_apply = findViewByIdNoCast(R.id.btn_apply);
         img_car_question = findViewByIdNoCast(R.id.img_car_question);
         sdv_carPhoto = findViewByIdNoCast(R.id.sdv_carPhoto);
-        myview = findViewByIdNoCast(R.id.myview);
         rv_promise = findViewByIdNoCast(R.id.rv_promise);
         setOnClick(et_carType,img_car_question, btn_apply);
     }
@@ -116,13 +118,8 @@ public class CarDetailFragment1 extends BaseFragment {
                 }
                 break;
             case R.id.et_carType:
-                Bundle bundle = new Bundle();
-                bundle.putString("cityId", MyApplication.getCityId());
-                bundle.putString("brandId", carDetailBean.brandId);
-                bundle.putString("styleId", carDetailBean.styleId);
-                carListPopuWindow = new CarListPopuWindow(getContext(), bundle);
-                carListPopuWindow.setAnimationStyle(R.style.AnimationRightFade);
-                carListPopuWindow.showAsDropDown(myview, DisplayUtil.getDensity_Width(getContext()),0);
+                if (myCallBack != null)
+                    myCallBack.showPop();
                 break;
             case R.id.img_car_question:
                 showPopupWindow(img_car_question);
@@ -156,6 +153,10 @@ public class CarDetailFragment1 extends BaseFragment {
         } else {
             popupWindow.showAsDropDown(view);// 显示再指定控件的下面
         }
+    }
+
+    public interface MyCallBack{
+        void showPop();
     }
 
 }
