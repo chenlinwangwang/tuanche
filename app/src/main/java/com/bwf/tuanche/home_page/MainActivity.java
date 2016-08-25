@@ -116,7 +116,13 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
         bottomView = (BottomView) findViewById(R.id.bottomview_main);
         relativeLayout = findViewByIdNoCast(R.id.rl_bottomview);
-//        View view=relativeLayout.getChildAt(0);
+//        View view=relativeLayout.getChildAt(R.id.tv_mine);
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ToastUtil.showToast("123");
+//            }
+//        });
         if (!MainActivity.this.isFinishing()) {
             bottomView.setSelect(0);
         }
@@ -247,22 +253,16 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         ToastUtil.showToast("更新数据");
-        new Thread(new Runnable() {
+        getBuyCar();
+        getDataType();
+        getData();
+        getBannerData();
+        refreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshLayout.setVisibility(View.INVISIBLE);//
-                    }
-                });
+              refreshLayout.setRefreshing(false);//更新完成，进度条消失
             }
-        });
+        },1000);
     }
 
     private static final int TIMES = 2000;

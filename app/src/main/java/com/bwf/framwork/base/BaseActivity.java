@@ -32,7 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             getSupportActionBar().hide();
         AppManager.getInstance().addActivity(this);
 
-        setTranslucentStatus();
+//        setTranslucentStatus();
 
         beforeInitView();
         initView();
