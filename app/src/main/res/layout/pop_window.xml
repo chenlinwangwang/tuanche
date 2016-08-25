@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_jiage"
+    android:padding="5dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/text_10"
+        android:textColor="@color/withe"
+        android:text="1、团长还在帮你砍价，还不确定底价"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/withe"
+        android:textSize="@dimen/text_10"
+        android:text="2、团购价格比较低，厂家不允许公开，公开后团购可能取消，从而影响团友的利益"/>
+</LinearLayout>

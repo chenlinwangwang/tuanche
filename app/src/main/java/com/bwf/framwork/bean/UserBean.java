@@ -50,4 +50,5 @@ public class UserBean extends BaseBean implements Parcelable {
             return new UserBean[size];
         }
     };
+
 }

@@ -1,14 +1,17 @@
 package com.bwf.tuanche.home_page.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bwf.framwork.base.BaseFragment;
 import com.bwf.framwork.image.ImageLoader;
+import com.bwf.framwork.utils.IntentUtils;
 import com.bwf.framwork.utils.LogUtils;
 import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.tuanche.R;
+import com.bwf.tuanche.details.HJiaDetailActivity;
 import com.bwf.tuanche.home_page.Bean.BannerBean;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -112,7 +115,9 @@ public class Fragment_5 extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.rl_hunyinzuojia:
-                ToastUtil.showToast("1");
+                Bundle bundle = new Bundle();
+                bundle.putString("cityId","156");
+                IntentUtils.openActivity(getContext(), HJiaDetailActivity.class,bundle);
                 break;
             case R.id.rl_mamigouche:
 

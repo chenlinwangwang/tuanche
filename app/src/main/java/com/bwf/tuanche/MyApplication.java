@@ -20,7 +20,7 @@ import okhttp3.OkHttpClient;
 public class MyApplication extends Application {
 
     private static MyApplication myApplication;
-
+    private static String cityId;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -56,7 +56,11 @@ public class MyApplication extends Application {
         return myApplication.getApplicationContext();
     }
 
+    public static void setCityId(String cityId) {
+        MyApplication.cityId = cityId;
+    }
 
-
-
+    public static String getCityId() {
+        return cityId;
+    }
 }

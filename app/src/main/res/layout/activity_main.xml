@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/main_layout"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <LinearLayout
         android:id="@+id/ll_main"
         android:layout_width="match_parent"
@@ -66,7 +66,7 @@
                         android:id="@+id/fragment_3"
                         android:name="com.bwf.tuanche.home_page.fragment.Fragment_3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content">
 
                     </fragment>
                 </LinearLayout>

@@ -22,6 +22,7 @@ import com.bwf.framwork.utils.LogUtils;
 import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.framwork.utils.UrlUtils;
 import com.bwf.tuanche.Login.LoginActivity;
+import com.bwf.tuanche.MyApplication;
 import com.bwf.tuanche.R;
 import com.bwf.tuanche.home_page.Bean.BannerBean;
 import com.bwf.tuanche.home_page.Bean.HotBrandBean;
@@ -297,6 +298,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     //
     @Override
     public void longitudeAndLatitude(String longitude, String Latitude) {
+
         //拿到回调回来的经纬度,并请求数据
         addNowCity(longitude,Latitude);
         //拿到数据之后就关闭当前定位
@@ -315,6 +317,8 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 //设置当前城市
                 select_city_chick.setText(result.name);
                 cityId = result.id+"";
+
+                MyApplication.setCityId(cityId);
                 dissmissProgressbar();
 
                 getBuyCar();
