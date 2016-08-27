@@ -4,10 +4,13 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bwf.framwork.utils.IntentUtils;
+import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.tuanche.R;
 import com.bwf.tuanche.selectcity.SelectCityActivity;
 
@@ -18,6 +21,7 @@ import com.bwf.tuanche.selectcity.SelectCityActivity;
 public class TitleBar extends LinearLayout implements View.OnClickListener {
 
     private TextView select_city_chick;
+    private EditText et_research;
     public TitleBar(Context context) {
         this(context,null);
     }
@@ -48,6 +52,8 @@ public void init(Context context){
     public void initView(){
         select_city_chick = (TextView) findViewById(R.id.select_city_chick);
         select_city_chick.setOnClickListener(this);
+        et_research = (EditText) findViewById(R.id.et_research);
+        et_research.setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +62,11 @@ public void init(Context context){
             case R.id.select_city_chick:
 //                IntentUtils.openActivity(getContext(), SelectCityActivity.class);
             break;
+            case R.id.et_research:
+                ToastUtil.showToast("跳转");
+            break;
+
         }
     }
+
 }

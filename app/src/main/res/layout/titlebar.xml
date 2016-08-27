@@ -16,37 +16,43 @@
             android:layout_weight="0"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
-            android:paddingRight="5dp"
+            android:paddingRight="2dp"
             android:paddingTop="10dp"
             android:text=""
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
         <ImageView
             android:id="@+id/icon_top_add_arrow"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center_vertical"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
             android:layout_marginTop="2dp"
             android:src="@mipmap/icon_top_add_arrow" />
 
         <EditText
             android:id="@+id/et_research"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
             android:drawableLeft="@mipmap/magnifying_glass"
+            android:padding="5dp"
             android:hint="请输入品牌、车型"
+            android:textSize="15dp"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"
             android:focusable="false"
+            android:background="@drawable/stroke_1"
             android:inputType="none" />
 
         <ImageView
+            android:id="@+id/img_QRCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:padding="5dp"
-            android:layout_margin="5dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:src="@mipmap/icon_top_icon_saomiao" />
     </LinearLayout>
 </LinearLayout>

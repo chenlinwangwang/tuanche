@@ -34,4 +34,9 @@ private BottomView bottomView;
     public void onClick(View view) {
 
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 }
