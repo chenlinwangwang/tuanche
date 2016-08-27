@@ -39,13 +39,15 @@ public class MyRecycleviewAdapter extends RecyclerView.Adapter<MyRecycleviewAdap
         myRecyclerViewHolder.img_record = (SimpleDraweeView) view.findViewById(R.id.img_record);
         myRecyclerViewHolder.tv_record_name = (TextView) view.findViewById(R.id.tv_record_name);
         myRecyclerViewHolder.tv_record_price = (TextView) view.findViewById(R.id.tv_record_price);
+        myRecyclerViewHolder.tv_test = (TextView) view.findViewById(R.id.tv_test);
         return myRecyclerViewHolder;
+
     }
 
     @Override
     public void onBindViewHolder(MyRecyclerViewHolder holder, int position) {
         //ViewHolder的执行操作
-        ImageLoader.getInstance().disPlayImage(holder.img_record,imgUrl[position]);
+        ImageLoader.getInstance().disPlayImage(holder.img_record,imgUrl[position]);//加载图片
     }
 
     @Override
@@ -55,11 +57,12 @@ public class MyRecycleviewAdapter extends RecyclerView.Adapter<MyRecycleviewAdap
 
 
     public class MyRecyclerViewHolder extends RecyclerView.ViewHolder{
-        public TextView tv_record_name,tv_record_price;
+        public TextView tv_record_name,tv_record_price,tv_test;
         public SimpleDraweeView img_record;;
 
         public MyRecyclerViewHolder(View itemView) {
             super(itemView);
         }
     }
+
 }

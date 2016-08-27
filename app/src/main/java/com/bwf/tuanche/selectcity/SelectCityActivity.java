@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class SelectCityActivity extends BaseActivity{
 
     private TextView select_city_title;//title当前城市
     private TextView tv_NowCity;//当前城市
+    private ImageView select_city_back;//返回键
     private TextView select_city_rim_city1,select_city_rim_city2,select_city_rim_city3,select_city_rim_city4;//周边城市
     //热门城市
     private TextView select_city_hot_city1,select_city_hot_city2,select_city_hot_city3,select_city_hot_city4,select_city_hot_city5,select_city_hot_city6,select_city_hot_city7,select_city_hot_city8;
@@ -51,6 +53,7 @@ public class SelectCityActivity extends BaseActivity{
     @Override
     public void initView() {
 
+        select_city_back = findViewByIdNoCast(R.id.select_city_back);
         select_city_title = findViewByIdNoCast(R.id.select_city_title);
         tv_NowCity = findViewByIdNoCast(R.id.tv_NowCity);
 
@@ -80,6 +83,8 @@ public class SelectCityActivity extends BaseActivity{
 
     @Override
     public void initData() {
+        //设置返回键
+        setToBack(select_city_back);
 
         //加载当前城市
         addNowCity();
@@ -112,11 +117,15 @@ public class SelectCityActivity extends BaseActivity{
                 Log.e("errMsg",errMsg);
             }
         });
+    }
 
-
-
-
-
+    /**
+     * 设置指定view为返回键
+     * @param view
+     */
+    @Override
+    protected void setToBack(View view) {
+        super.setToBack(view);
     }
 
     //加载当前城市

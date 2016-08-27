@@ -134,4 +134,18 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         AppManager.getInstance().remove(this);
         super.onDestroy();
     }
+
+    /**
+     * 将某个View设置为返回键
+     * @param view
+     */
+    protected void setToBack(View view){
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
 }

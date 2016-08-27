@@ -248,9 +248,8 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 bundle.putString("nowcity",nowcoty);
                 IntentUtils.openActivity(this, SelectCityActivity.class,bundle);
             break;
-            case R.id.tv_order://
-                UpdatePopupWindow update = new UpdatePopupWindow(this);
-                update.setShowAtLocation(main_view, Gravity.CENTER,0,0);
+            case R.id.tv_order://订单
+                IntentUtils.openActivity(this,LoginActivity.class);
             break;
 
         }
