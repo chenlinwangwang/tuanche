@@ -9,9 +9,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.baidu.location.LocationClient;
@@ -19,11 +17,13 @@ import com.baidu.location.LocationClientOption;
 import com.bwf.framwork.base.BaseActivity;
 import com.bwf.framwork.http.HttpArrayCallBack;
 import com.bwf.framwork.http.HttpHelper;
+import com.bwf.framwork.utils.AppUtil;
 import com.bwf.framwork.utils.IntentUtils;
 import com.bwf.framwork.utils.LogUtils;
 import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.framwork.utils.UrlUtils;
 import com.bwf.tuanche.Login.LoginActivity;
+import com.bwf.tuanche.MyApplication;
 import com.bwf.tuanche.R;
 import com.bwf.tuanche.home_page.Bean.BannerBean;
 import com.bwf.tuanche.home_page.Bean.HotBrandBean;
@@ -40,6 +40,7 @@ import com.bwf.tuanche.selectcity.SelectCityActivity;
 import com.bwf.tuanche.selectcity.baidumap.BaiDuLocationListener;
 import com.bwf.tuanche.selectcity.citylistresultbean.NowCityBean;
 import com.bwf.tuanche.update.UpdatePopupWindow;
+import com.bwf.tuanche.update.updateBean.UpdateResult;
 
 import java.util.List;
 
@@ -57,6 +58,8 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     private RelativeLayout relativeLayout;
     private TextView select_city_chick,tv_order;
     private View main_view;
+    private static Boolean flag  = false;
+//    private String AppVersion;
     //百度定位
     private LocationClient mLocationClient;
     //百度定位返回参数类
@@ -78,9 +81,11 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         if (nowcityId != null && nowcityname != null){
             cityId = nowcityId;
             cityName = nowcityname;
-
         }
-        handler.sendEmptyMessageDelayed(2,1000);
+        //获取当前App版本号
+        //请求app当前并比较最新版本
+        getUpdateDate();
+
     }
 
 
@@ -297,9 +302,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 isBack = true;
                 break;
             case 2:
-                //更新
-                UpdatePopupWindow update = new UpdatePopupWindow(this);
-                update.setShowAtLocation(main_view, Gravity.CENTER,0,0);
+
                 break;
         }
         return false;
@@ -308,6 +311,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     //
     @Override
     public void longitudeAndLatitude(String longitude, String Latitude) {
+
         //拿到回调回来的经纬度,并请求数据
         addNowCity(longitude,Latitude);
         //拿到数据之后就关闭当前定位
@@ -326,6 +330,8 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 //设置当前城市
                 select_city_chick.setText(result.name);
                 cityId = result.id+"";
+
+                MyApplication.setCityId(cityId);
                 dissmissProgressbar();
 
                 getBuyCar();
@@ -343,9 +349,37 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    /**
+     * 请求更新数据
+     */
+    public void getUpdateDate(){
+        HttpHelper.getNewVersion(UrlUtils.VersionUpadteServlet, new com.bwf.framwork.db.HttpCallBack<UpdateResult>() {
+            @Override
+            public void onSuccess(UpdateResult result) {
+//                Log.e("UpdateResult","UpdateResult " +result.toString());
+//                Log.e("rrr","//////////////"+result.versionCode);
+//                Log.e("rrr","**************"+AppUtil.getAppVersionCode(MainActivity.this));
+//                Log.e("rrr","++++++++++++++"+AppUtil.getAppVersionName(MainActivity.this));
+//                Log.e("rrr","--------------"+MyApplication.getNowAppVersion());
+                if (!flag){
+                    if (!result.versionCode.equals(MyApplication.getNowAppVersion())){
+                        //显示pop
+                        UpdatePopupWindow update = new UpdatePopupWindow(MainActivity.this);
+                        update.setAppData(result.description,result.versionName);
+                        update.setShowAtLocation(main_view, Gravity.CENTER,0,0);
 
+                        flag = true;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFail(String errMsg) {
+
+            }
+        });
     }
+
+
 }

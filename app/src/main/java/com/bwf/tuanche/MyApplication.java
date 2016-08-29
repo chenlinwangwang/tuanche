@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.bwf.framwork.utils.AppUtil;
 import com.bwf.tuanche.selectcity.baidumap.BaiDuLocationListener;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -20,7 +21,7 @@ import okhttp3.OkHttpClient;
 public class MyApplication extends Application {
 
     private static MyApplication myApplication;
-
+    private static String cityId;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,8 +33,9 @@ public class MyApplication extends Application {
         initOkhttp();
         //初始化百度定位
 
-
     }
+
+
 
     /**
      * 初始化okhttp
@@ -56,7 +58,15 @@ public class MyApplication extends Application {
         return myApplication.getApplicationContext();
     }
 
+    public static void setCityId(String cityId) {
+        MyApplication.cityId = cityId;
+    }
 
-
-
+    public static String getCityId() {
+        return cityId;
+    }
+    //获取当前App的版本
+    public static int getNowAppVersion(){
+        return AppUtil.getAppVersionCode(MyApplication.getAppContext());
+    }
 }

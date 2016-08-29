@@ -71,7 +71,7 @@
                         android:id="@+id/fragment_3"
                         android:name="com.bwf.tuanche.home_page.fragment.Fragment_3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content">
 
                     </fragment>
                 </LinearLayout>

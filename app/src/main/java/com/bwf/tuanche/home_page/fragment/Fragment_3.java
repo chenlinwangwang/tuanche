@@ -1,12 +1,15 @@
 package com.bwf.tuanche.home_page.fragment;
 
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.bwf.framwork.base.BaseFragment;
+import com.bwf.framwork.utils.IntentUtils;
 import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.tuanche.R;
+import com.bwf.tuanche.details.DetailsActivity;
 import com.bwf.tuanche.home_page.Bean.HotTypeBean;
 import com.bwf.tuanche.home_page.adapter.Fragment_3_Adapter;
 
@@ -59,6 +62,9 @@ public class Fragment_3 extends BaseFragment implements Fragment_3_Adapter.CallB
 
     @Override
     public void onClick(int position) {
-        ToastUtil.showToast("点击了： "+position);
+        Bundle bundle = new Bundle();
+        bundle.putString("styleId",result.get(position).id + "");
+        bundle.putString("brandId",result.get(position).brandId + "");
+        IntentUtils.openActivity(getContext(), DetailsActivity.class,bundle);
     }
 }

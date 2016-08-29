@@ -1,13 +1,16 @@
 package com.bwf.tuanche.home_page.fragment;
 
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.bwf.framwork.base.BaseFragment;
+import com.bwf.framwork.utils.IntentUtils;
 import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.tuanche.R;
+import com.bwf.tuanche.details.DetailsActivity;
 import com.bwf.tuanche.home_page.Bean.HotBrandBean;
 import com.bwf.tuanche.home_page.adapter.Fragment_2_Adapter;
 
@@ -59,6 +62,9 @@ public class Fragment_2 extends BaseFragment implements Fragment_2_Adapter.CallB
 
     @Override
     public void onClick(int position) {
-        ToastUtil.showToast("点击了：　　" + position);
+        Bundle bundle = new Bundle();
+        bundle.putString("id", list.get(position).id);
+        IntentUtils.openActivity(getContext(), DetailsActivity.class, bundle);
     }
+
 }

@@ -13,9 +13,11 @@ import android.widget.TextView;
 import com.bwf.framwork.base.BaseBean;
 import com.bwf.framwork.http.HttpCallBack;
 import com.bwf.framwork.http.HttpHelper;
+import com.bwf.framwork.utils.AppUtil;
 import com.bwf.framwork.utils.ToastUtil;
 import com.bwf.framwork.utils.UrlUtils;
 import com.bwf.tuanche.R;
+import com.bwf.tuanche.home_page.MainActivity;
 import com.bwf.tuanche.update.updateBean.UpdateResult;
 
 /**
@@ -28,13 +30,22 @@ public class UpdatePopupWindow extends PopupWindow implements View.OnClickListen
     private ImageView img_update_back;//取消
     private Button btu_update;//立即跟新
     private Context context;
-
+    private String AppVersion;
+    private String AppContent;
     public UpdatePopupWindow(Context context) {
         super(context);
         this.context = context;
         initView();
     }
 
+    public void setAppData(String appContent,String appVersion) {
+        AppContent = appContent;
+        AppVersion = appVersion;
+        //设置更新内容的显示
+        tv_update_neirong.setText(AppContent);
+        //设置更新版本
+        tv_update_banben.setText(AppVersion);
+    }
     public UpdatePopupWindow(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -63,9 +74,6 @@ public class UpdatePopupWindow extends PopupWindow implements View.OnClickListen
         img_update_back.setOnClickListener(this);
         btu_update.setOnClickListener(this);
 
-        //更新获取
-        getUpdateDate();
-
     }
 
     //pop显示位置
@@ -87,26 +95,6 @@ public class UpdatePopupWindow extends PopupWindow implements View.OnClickListen
         }
     }
 
-    /**
-     * 请求更新数据
-     */
-    public void getUpdateDate(){
-        HttpHelper.getNewVersion(UrlUtils.VersionUpadteServlet, new com.bwf.framwork.db.HttpCallBack<UpdateResult>() {
-            @Override
-            public void onSuccess(UpdateResult result) {
-//                Log.e("UpdateResult","UpdateResult " +result.toString());
-                //设置更新内容的显示
-                tv_update_neirong.setText(result.description);
-                //设置更新版本
-                tv_update_banben.setText(result.versionName);
-            }
-
-            @Override
-            public void onFail(String errMsg) {
-
-            }
-        });
 
 
-    }
 }

@@ -3,6 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorCity">#FF4847</color>
+    <color name="colorButton">#FF3837</color>
+    <color name="colorLine">#ACACAC</color>
+    <color name="colortintLine">#D1D5DC</color>
+    <color name="hintLine">#ECECEC</color>
+    <color name="grayLine">#E8E8E8</color>
+    <color name="withe">#ffffff</color>
+    <color name="colorTextHuang">#FD9908</color>
+    <color name="colorTextBlack">#000000</color>
     <color name="gray">#eae8e8</color>
     <color name="write">#FFFFFF</color>
     <color name="bg_bantouming">#1F000000</color>
@@ -16,6 +25,5 @@
     <color name="yellow">#FFCB29</color>
     <color name="red">#FF0000</color>
     <color name="blue">#098DE0</color>
-
 
 </resources>
