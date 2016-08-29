@@ -29,7 +29,7 @@ public class BottomView extends LinearLayout implements View.OnClickListener {
         this(context, null);
     }
 
-    public BottomView(Context context, AttributeSet attrs) {
+    public BottomView(Context context, AttributeSet attrs)  {
         this(context, attrs, 0);
     }
 
@@ -59,17 +59,16 @@ public class BottomView extends LinearLayout implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_home:
+            case R.id.tv_home://首页
                 IntentUtils.openActivity(getContext(), MainActivity.class);
                 break;
             case R.id.tv_order://订单（登录页面）
-
                 IntentUtils.openActivity(getContext(), LoginActivity.class);
                 break;
-            case R.id.tv_server:
+            case R.id.tv_server://客服
                 IntentUtils.openActivity(getContext(), ServerActivity.class);
                 break;
-            case R.id.tv_mine:
+            case R.id.tv_mine://我的
                 IntentUtils.openActivity(getContext(), MyActivity.class);
                 break;
         }

@@ -40,17 +40,17 @@ public class GuideActivity extends BaseActivity {
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
                 setcheck(position);
                 if (position==1){
                     img_start.setVisibility(View.VISIBLE);
                 }else {
                     img_start.setVisibility(View.INVISIBLE);
                 }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
             }
 
             @Override

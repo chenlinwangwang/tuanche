@@ -71,6 +71,7 @@
                     android:layout_marginTop="10dp"
                     android:drawableTop="@mipmap/icon_jilu"
                     android:padding="10dp"
+                    android:textAlignment="center"
                     android:text="浏览记录" />
             </LinearLayout>
 
@@ -104,7 +105,8 @@
                     android:layout_weight="1"
                     android:drawableTop="@mipmap/icon_wode_mai"
                     android:padding="10dp"
-                    android:text="        买车订单"
+                    android:textAlignment="center"
+                    android:text="买车订单"
 
                     />
 
@@ -115,7 +117,8 @@
                     android:layout_weight="1"
                     android:drawableTop="@mipmap/icon_wode_yangche"
                     android:padding="10dp"
-                    android:text="       养车订单" />
+                    android:textAlignment="center"
+                    android:text="养车订单" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -124,7 +127,8 @@
                     android:layout_weight="1"
                     android:drawableTop="@mipmap/icon_wode_maiche"
                     android:padding="10dp"
-                    android:text="       卖车订单" />
+                    android:textAlignment="center"
+                    android:text="卖车订单" />
             </LinearLayout>
 
             <TextView
@@ -151,7 +155,8 @@
                     android:layout_weight="1"
                     android:drawableTop="@mipmap/icon_wode_hongbao"
                     android:padding="10dp"
-                    android:text="          红包"
+                    android:textAlignment="center"
+                    android:text="红包"
 
                     />
 
@@ -162,7 +167,8 @@
                     android:layout_weight="1"
                     android:drawableTop="@mipmap/icon_diyongquan"
                     android:padding="10dp"
-                    android:text="         优惠券" />
+                    android:textAlignment="center"
+                    android:text="优惠券" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -171,7 +177,8 @@
                     android:layout_weight="1"
                     android:drawableTop="@mipmap/icon_libao"
                     android:padding="10dp"
-                    android:text="        大礼包" />
+                    android:textAlignment="center"
+                    android:text="大礼包" />
             </LinearLayout>
 
             <LinearLayout

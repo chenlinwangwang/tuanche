@@ -1,14 +1,15 @@
 package com.bwf.tuanche.home_page;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,7 +18,6 @@ import com.baidu.location.LocationClientOption;
 import com.bwf.framwork.base.BaseActivity;
 import com.bwf.framwork.http.HttpArrayCallBack;
 import com.bwf.framwork.http.HttpHelper;
-import com.bwf.framwork.utils.AppUtil;
 import com.bwf.framwork.utils.IntentUtils;
 import com.bwf.framwork.utils.LogUtils;
 import com.bwf.framwork.utils.ToastUtil;
@@ -30,6 +30,7 @@ import com.bwf.tuanche.home_page.Bean.HotBrandBean;
 import com.bwf.tuanche.home_page.Bean.HotTypeBean;
 import com.bwf.tuanche.home_page.Bean.ResultBean;
 import com.bwf.tuanche.home_page.View.BottomView;
+import com.bwf.tuanche.home_page.View.TitleBar;
 import com.bwf.tuanche.home_page.fragment.Fragment_1;
 import com.bwf.tuanche.home_page.fragment.Fragment_1_Banner;
 import com.bwf.tuanche.home_page.fragment.Fragment_2;
@@ -41,6 +42,7 @@ import com.bwf.tuanche.selectcity.baidumap.BaiDuLocationListener;
 import com.bwf.tuanche.selectcity.citylistresultbean.NowCityBean;
 import com.bwf.tuanche.update.UpdatePopupWindow;
 import com.bwf.tuanche.update.updateBean.UpdateResult;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 import java.util.List;
 
@@ -66,6 +68,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     private BaiDuLocationListener baiDuLocationListener = new BaiDuLocationListener(this);
     private String cityId;
     private String cityName;
+    private TitleBar titleBar;
 
 
     @Override
@@ -127,8 +130,24 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
 
         bottomView = (BottomView) findViewById(R.id.bottomview_main);
+        titleBar=findViewByIdNoCast(R.id.title);//加载titlebar
+       ImageView img_QRCode =findViewByIdNoCast(R.id.img_QRCode);//加载二维码
+        img_QRCode.setOnClickListener(new View.OnClickListener() {//二维码扫描
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(MainActivity.this, CaptureActivity.class), 0);
+            }
+        });
+
+
         relativeLayout = findViewByIdNoCast(R.id.rl_bottomview);
-//        View view=relativeLayout.getChildAt(0);
+//        View view=relativeLayout.getChildAt(R.id.tv_mine);
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ToastUtil.showToast("123");
+//            }
+//        });
         if (!MainActivity.this.isFinishing()) {
             bottomView.setSelect(0);
         }
@@ -143,10 +162,19 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {//二维码扫描结果
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 100) {
+            Bundle bundle = data.getExtras();
+            String result = bundle.getString("result");
+        }
+    }
+
+    @Override
     public void initData() {
 
         baiDuLocation();
-
+        showPogressbar();
         //设置当前城市
         select_city_chick.setText(cityName);
         getBuyCar();
@@ -172,7 +200,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         mLocationClient.start();
     }
 
-    public void getBuyCar(){
+    public void getBuyCar(){//低价购车
         HttpHelper.getDetail_1(UrlUtils.BUY_CAR, cityId, new com.bwf.framwork.db.HttpCallBack<ResultBean>() {
             @Override
             public void onSuccess(ResultBean result) {
@@ -190,25 +218,29 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     }
 
     public void getData() {//获取热门品牌数据
-
+        showPogressbar();
         HttpHelper.getHotBrand(UrlUtils.HOT_BRAND, "2", cityId, new com.bwf.framwork.db.HttpCallBack<HotBrandBean>() {
             @Override
             public void onSuccess(HotBrandBean result) {
+                dissmissProgressbar();
                 LogUtils.e("Tag", "热门品牌：" + result.getList());
                 List<HotBrandBean.ListBean> newList = result.list;
 //                newList.add(new HotBrandBean.ListBean("更多","more"));
                 fragment_2.setList(newList);
-                dissmissProgressbar();
+
             }
 
             @Override
             public void onFail(String errMsg) {
-                dissmissProgressbar();
+
+
+
             }
         });
     }
 
     public void getDataType() {//获取热门车型数据
+        showPogressbar();
         HttpHelper.getHotType(UrlUtils.HOT_TYPE, "20", "10", cityId, new HttpArrayCallBack<HotTypeBean>() {
 
             @Override
@@ -274,6 +306,17 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         getDataType();
         getData();
         getBannerData();
+        ToastUtil.showToast("更新数据");
+        getBuyCar();
+        getDataType();
+        getData();
+        getBannerData();
+        refreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+              refreshLayout.setRefreshing(false);//更新完成，进度条消失
+            }
+        },1000);
     }
 
     private static final int TIMES = 2000;
@@ -332,8 +375,6 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 cityId = result.id+"";
 
                 MyApplication.setCityId(cityId);
-                dissmissProgressbar();
-
                 getBuyCar();
                 getDataType();
                 getData();
@@ -382,4 +423,9 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 }

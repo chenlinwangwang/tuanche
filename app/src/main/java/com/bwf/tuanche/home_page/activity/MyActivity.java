@@ -51,4 +51,9 @@ public class MyActivity extends BaseActivity {
             break;
         }
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 }

@@ -20,6 +20,7 @@ import com.bwf.tuanche.details.fragment.CarDetailFragment1;
 import com.bwf.tuanche.details.fragment.CarDetailFragment2;
 import com.bwf.tuanche.details.fragment.CarListPopuWindow;
 import com.bwf.tuanche.home_page.MainActivity;
+import com.bwf.tuanche.home_page.activity.view.sharePopupWindow;
 
 /**
  * 详情页
@@ -133,7 +134,8 @@ public class DetailsActivity extends BaseActivity implements CarDetailFragment1.
                 IntentUtils.openActivity(DetailsActivity.this, MainActivity.class);
                 break;
             case R.id.tv_share:
-                IntentUtils.openActivity(DetailsActivity.this, MainActivity.class);
+                sharePopupWindow popupWindow = new sharePopupWindow(DetailsActivity.this);
+                popupWindow.showPopWindow(view);
                 break;
         }
     }
